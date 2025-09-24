@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
+<script type="module">
+import { potrace, init } from '../dist/index.js';
+
+await init();
+
+const blob1 = await (await fetch('./2.jpg')).blob();
+
+const svg = await potrace(blob1, {
+  turdsize: 2,
+  turnpolicy: 4,
+  alphamax: 1,
+  opticurve: 1,
+  opttolerance: 0.2,
+  pathonly: false,
+  extractcolors: false, // black and white
+});
+div2.innerHTML = svg;
+</script>
+
+<div id="div2"></div>
+
+</html>
