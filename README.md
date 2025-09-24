@@ -2,46 +2,40 @@
 
 A modern ESM build of the [Potrace](http://potrace.sourceforge.net/) library for use in the browser.
 
-## Installation
-
-```bash
-npm install --save esm-potrace-wasm
-```
-
 ## Usage
 
 ```js
-import { potrace, init } from 'esm-potrace-wasm';
+import { potrace, init } from 'https://code4fukui.github.io/esm-potrace-wasm/dist/index.js';
 
-(async () => {
-  // Initialize the module once.
-  await init();
+// Initialize the module once.
+await init();
 
-  /**
-   * The `imageBitmapSource` parameter is an `ImageBitmapSource`, that is any of:
-   * - `HTMLImageElement`
-   * - `SVGImageElement`
-   * - `HTMLVideoElement`
-   * - `HTMLCanvasElement`
-   * - `ImageData`
-   * - `ImageBitmap`
-   * - `Blob`
-   */
-  const svg = await potrace(
-    imageBitmapSource,
-    (options = {
-      turdsize: 2,
-      turnpolicy: 4,
-      alphamax: 1,
-      opticurve: 1,
-      opttolerance: 0.2,
-      pathonly: false,
-      extractcolors: true,
-      posterizelevel: 2, // [1, 255]
-      posterizationalgorithm: 0, // 0: simple, 1: interpolation
-    })
-  );
-})();
+const blob1 = await (await fetch('./2.jpg')).blob();
+
+/**
+  * The `imageBitmapSource` parameter is an `ImageBitmapSource`, that is any of:
+  * - `HTMLImageElement`
+  * - `SVGImageElement`
+  * - `HTMLVideoElement`
+  * - `HTMLCanvasElement`
+  * - `ImageData`
+  * - `ImageBitmap`
+  * - `Blob`
+  */
+const svg = await potrace(
+  blob1,
+  (options = {
+    turdsize: 2,
+    turnpolicy: 4,
+    alphamax: 1,
+    opticurve: 1,
+    opttolerance: 0.2,
+    pathonly: false,
+    extractcolors: true, // if false, black and white mode
+    posterizelevel: 2, // [1, 255]
+    posterizationalgorithm: 0, // 0: simple, 1: interpolation
+  })
+);
 ```
 
 ## Developing
