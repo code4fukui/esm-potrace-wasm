@@ -4,13 +4,15 @@ A modern ESM build of the [Potrace](http://potrace.sourceforge.net/) library for
 
 ## Usage
 
+### on web
+
 ```js
-import { potrace, init } from 'https://code4fukui.github.io/esm-potrace-wasm/dist/index.js';
+import { potrace, init } from "https://code4fukui.github.io/esm-potrace-wasm/dist/index.js";
 
 // Initialize the module once.
 await init();
 
-const blob1 = await (await fetch('./2.jpg')).blob();
+const blob1 = await (await fetch("./2.jpg")).blob();
 
 /**
   * The `imageBitmapSource` parameter is an `ImageBitmapSource`, that is any of:
@@ -38,6 +40,30 @@ const svg = await potrace(
 );
 ```
 
+### on cli
+
+```js
+import { potrace, init } from "https://code4fukui.github.io/esm-potrace-wasm/dist/index.js";
+import { JPEG } from "https://code4fukui.github.io/JPEG/JPEG.js";
+
+await init();
+
+const data = await Deno.readFile("./2.jpg");
+const img = JPEG.decode(data);
+
+const svg = await potrace(img, {
+  turdsize: 2,
+  turnpolicy: 4,
+  alphamax: 1,
+  opticurve: 1,
+  opttolerance: 0.2,
+  pathonly: false,
+  extractcolors: false, // black and white
+});
+//console.log(svg);
+await Deno.writeTextFile("./2.svg", svg);
+```
+
 ## Developing
 
 Modify `src/potrace/` and run `npm run build` to update the ESM build in `dist/`.
@@ -58,7 +84,7 @@ This library is used in <a href="https://svgco.de/">SVGcode</a>.
 
 ## Acknowledgements
 
-Based on [@nturley](https://github.com/nturley)'s [fork](https://github.com/nturley/potrace-wasm) of
-[@IguteChung](https://github.com/IguteChung)'s initial [potrace-wasm](https://github.com/IguteChung/potrace-wasm).
+Based on [@nturley](https://github.com/nturley)"s [fork](https://github.com/nturley/potrace-wasm) of
+[@IguteChung](https://github.com/IguteChung)"s initial [potrace-wasm](https://github.com/IguteChung/potrace-wasm).
 Unfortunately, the original author did not react on my
 [Pull Request](https://github.com/IguteChung/potrace-wasm/pull/1), so I forked.

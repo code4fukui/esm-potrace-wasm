@@ -3,7 +3,8 @@
   "remote": {
     "https://code4fukui.github.io/JPEG/JPEG.js": "fc5d274a374f11d5e405b3efdd3025b97e756a47d41d4c24fe8d10b930efb8c0",
     "https://code4fukui.github.io/JPEG/lib/decoder.js": "e2965640a35d6e1f2089b704a73cc39ed2ced1b9b8e1bbc4cd6fa2d49c78efe4",
-    "https://code4fukui.github.io/JPEG/lib/encoder.js": "3dd75fc28e16a5e9e129fd8cc149db2fc16373e72c6076e7bec11cd4bcaef225"
+    "https://code4fukui.github.io/JPEG/lib/encoder.js": "3dd75fc28e16a5e9e129fd8cc149db2fc16373e72c6076e7bec11cd4bcaef225",
+    "https://code4fukui.github.io/esm-potrace-wasm/dist/index.js": "a5c200b417c17a71f6b6e0092878a47e8d840de138bf24938873942155f6a5ea"
   },
   "workspace": {
     "packageJson": {

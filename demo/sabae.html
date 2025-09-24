@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
+<title>esm-potrace-wasm demo</title>
+</head><body>
+<h1>esm-potrace-wasm demo</h1>
+
+<main id="main">
+  org images<br>
+  <div id="org"></div>
+  converted svg<br>
+  <div id="dst"></div>
+</main>
+
+<hr>
+lib: A modern ESM build of the <a href=http://potrace.sourceforge.net/>Potrace</a> library<br>
+<a href=https://github.com/code4fukui/esm-potrace-wasm>src on GitHub</a><br>
+
+
+<script type="module">
+import { potrace, init } from "https://code4fukui.github.io/esm-potrace-wasm/dist/index.js";
+
+// Initialize the module once.
+await init();
+
+const name = "sabaefont";
+
+for (const c of name) {
+  const url = "https://code4fukui.github.io/sabae-font/src_split/" + c + ".jpg";
+
+  const img = new Image();
+  img.src = url;
+  org.appendChild(img);
+
+  const blob = await (await fetch(url)).blob();
+
+  const svg = await potrace(
+    blob,
+    {
+      turdsize: 2,
+      turnpolicy: 4,
+      alphamax: 1,
+      opticurve: 1,
+      opttolerance: 0.2,
+      pathonly: false,
+      extractcolors: false, // if false, black and white mode
+      posterizelevel: 2, // [1, 255]
+      posterizationalgorithm: 0, // 0: simple, 1: interpolation
+    }
+  );
+  const span = document.createElement("span");
+  span.innerHTML = svg;
+  dst.appendChild(span);
+}
+
+</script>
+</body></html>
