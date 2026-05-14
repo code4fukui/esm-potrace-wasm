@@ -30,3 +30,6 @@ yarn-error.log*
 
 .vscode
 .vs
+# meta-ops cleanup
+Thumbs.db
+node_modules/
